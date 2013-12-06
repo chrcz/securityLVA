@@ -1,0 +1,156 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Institut für Rechnergestuetzte Automation
+% Forschungsgruppe Industrial Software
+% Arbeitsgruppe ESSE
+% http://security.inso.tuwien.ac.at/
+% lva.security@inso.tuwien.ac.at
+%
+% Version 2013-10-24
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,a4paper,titlepage,oneside]{scrartcl}
+\usepackage{esseProtocol}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% FOR STUDENTS
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Group number or "0" for Lab0
+\newcommand{\gruppe}{21}
+% Date
+\newcommand{\datum}{2013-11-28}
+% valid values: "Lab0", "Lab1" (be sure to use Uppercase for first character)
+\newcommand{\lab}{Lab1}
+
+% name of course
+\newcommand{\lvaname}{Introduction to Security}
+% number of course
+\newcommand{\lvanr}{183.594}
+% year and term, for example: "SS 2012", "WS 2012", "SS 2013", etc.
+\newcommand{\semester}{WS 2013}
+
+% Student data in Lab0 or 1. student of group in Lab1
+\newcommand{\studentAName}{Christoph Czurda}
+\renewcommand{\studentAMatrnr}{0704272}
+\newcommand{\studentAEmail}{e0704272@student.tuwien.ac.at}
+
+% 2. student of group in Lab1, for Lab0 or if your group has less students, remove these 3 lines
+\newcommand{\studentBName}{Alexander Karla-Hager}
+\renewcommand{\studentBMatrnr}{0925055}
+\newcommand{\studentBEmail}{e0925055@student.tuwien.ac.at}
+
+% 3. student of group in Lab1, for Lab0 or if your group has less students, remove these 3 lines
+\newcommand{\studentCName}{Rainer Schwarzinger}
+\renewcommand{\studentCMatrnr}{9027586}
+\newcommand{\studentCEmail}{e9027586@student.tuwien.ac.at}
+
+% 4. student of group in Lab1, for Lab0 or if your group has less students, remove these 3 lines
+\newcommand{\studentDName}{Philipp Schiffner}
+\renewcommand{\studentDMatrnr}{0925766}
+\newcommand{\studentDEmail}{e0925766@student.tuwien.ac.at}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% DO NOT CHANGE THE FOLLOWING PART
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\lang}{de}
+\newcommand{\colormode}{color}
+\newcommand{\dokumenttyp}{Abgabedokument \lab}
+
+\begin{document}
+
+\maketitle
+\setcounter{section}{0}
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CONTENT OF DOCUMENT STARTS HERE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Task 1}
+
+Man musste den ASCII Code jedes Zeichens -4 rechnen und wenn man unter 65 (Wert von 'A') kommt, wieder von oben anfangen, also von 90 (Wert von 'Z') abziehen. Dann ergibt sich der Firmenname WEE.
+
+\section{Task 2A}
+
+\subsection{Wie lautet der WEP Schlüssel?}
+
+00:00:0D:EA:DB:EE:FD:EA:DB:EE:F0:00:00
+
+\subsection{Vorgehensweise}
+
+\begin{lstlisting}
+aircrack-ng i_dump01_eqM4mptgSayoYpd8.cap
+\end{lstlisting}
+
+
+\subsection{TODO}
+
+Wie funktioniert der Angriff auf das WLAN und wie könnten Sie das Netzwerk vor solchen Angriffen schützen?
+Wie könnte der LAN Dump erstellt worden sein? Welche Sicherheitsmaßnahmen sollten das in Produktiv-Systemen verhindern?
+
+\subsection{Sub-Ueberschrift 1}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+
+\subsection{Sub-Ueberschrift 2}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+
+\subsection{Sub-Ueberschrift 3}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+
+\section{Beispiele}
+
+\subsection{Source Code formatieren}
+Es folgen einige Beispiele wie Sourcecode in diesem Dokument formatiert und referenziert werden kann
+(\hyperref[code:beispiel1]{siehe Listing~\ref*{code:beispiel1} auf Seite~\pageref*{code:beispiel1}} und \hyperref[code:beispiel2]{siehe Listing~\ref*{code:beispiel2} auf Seite~\pageref*{code:beispiel2}}).
+
+Ebenso können kurzer Code oder kurze Befehle direkt in der Zeile in einem \lstinline{lstinline Block} mit typengleicher Schrift formatiert werden.
+
+\lstinputlisting[caption=Example C/C++ file,label=code:beispiel1,style=c]{example.c}
+
+\begin{lstlisting}[caption=Example bash script,label=code:beispiel2,style=simple]
+#!/bin/bash
+echo "Bash version ${BASH_VERSION}..."
+for i in {0..10..2}
+  do
+     echo "Welcome $i times"
+ done
+
+echo "some very very very very very very very very very very very very very very very very very very very very long string"
+
+exit 0;
+\end{lstlisting}
+
+\subsection{Bilder}
+
+Es folgen einige Beispiele wie Bilder in diesem Dokument eingefuegt werden koennen
+(\hyperref[fig:logo1]{siehe Abbildung~\ref*{fig:logo1} auf Seite~\pageref*{fig:logo1}}).
+
+\begin{figure}[h!]
+  \centering
+  \fbox{
+    \includegraphics[width=0.4\textwidth]{./imgs/esse-color.png}
+  }
+  \caption{ESSE Logo}
+  \label{fig:logo1}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% DO NOT CHANGE THE FOLLOWING PART
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
