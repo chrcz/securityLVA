@@ -1,7 +1,7 @@
 securityLVA
 ===========
 
-Um das Repository auszuchecken:
+Um das Repository auszuchecken (nur einmal notwendig, ab dann reicht git pull):
 
 git clone https://github.com/chrcz/securityLVA.git
 
