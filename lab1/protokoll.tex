@@ -78,7 +78,13 @@
 
 \section{Task 1}
 
-Man musste den ASCII Code jedes Zeichens -4 rechnen und wenn man unter 65 (Wert von 'A') kommt, wieder von oben anfangen, also von 90 (Wert von 'Z') abziehen. Dann ergibt sich der Firmenname WEE.
+\subsection{Welche Firma hat den Auftrag geschickt?}
+
+WEE
+
+\subsection{Vorgehensweise}
+
+Man musste vom ASCII Code jedes Zeichens 4 abziehen und wenn man unter 65 (Wert von 'A') kommt, wieder von oben anfangen, also von 90 (Wert von 'Z') abziehen. Dann ergibt sich in der letzten Zeile der Firmenname WEE.
 
 \section{Task 2A}
 
@@ -92,8 +98,57 @@ Man musste den ASCII Code jedes Zeichens -4 rechnen und wenn man unter 65 (Wert 
 aircrack-ng i_dump01_eqM4mptgSayoYpd8.cap
 \end{lstlisting}
 
+\section{Task 2B}
 
-\subsection{TODO}
+\subsection{Wie lautet der WPA-Schluessel?}
+
+semisecret
+
+\subsection{Vorgehensweise}
+
+Mit aircrack-ng kann man mit einer Wordlist aus einem WLAN Dump das WPA Passwort herausfinden. Wir haben diese Wordlist verwendet: ftp://ftp.openwall.com/pub/wordlists/all.gz
+\begin{lstlisting}
+aircrack-ng -w wordlist i_dump02_6yiuXJ0MR8qOtysR.cap
+\end{lstlisting}
+
+\section{Task 3A}
+
+\subsection{Wie lautet der Benutzername der als letztes das Projekt Sonnensturm geoeffnet hat?}
+
+esunden
+
+\subsection{Vorgehensweise}
+
+Der Java Client für die Projektdatenbank enthält Passwort und Benutzername für die Anmeldung in Klartext. Dazu muss man das jar entpacken und dann den Bytecode der enthaltenen Dateien anschauen. Mit dem Befehl
+\begin{lstlisting}
+javap -c at/ac/tuwien/inso/introsec/ws2013/lab1/gui/ClientLocalLoginGui
+\end{lstlisting}
+sieht man 
+\begin{lstlisting}
+   13:  getfield    #81; //Field userTf1:Ljavax/swing/JTextField;
+   16:  invokevirtual   #166; //Method javax/swing/JTextField.getText:()Ljava/lang/String;
+   19:  getstatic   #169; //Field at/ac/tuwien/inso/introsec/ws2013/lab1/domain/Submarines.sideBound:Ljava/lang/String;
+   22:  invokevirtual   #175; //Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+\end{lstlisting}
+
+Das heißt der String im JTextField userTf1 wird mit dem String at/ac/tuwien/inso/introsec/ws2013/lab1/domain/Submarines.sideBound verglichen. Mit dem selben Befehl kann man sich dann den Bytecode für Submarines.class anschauen. Dort sieht man, dass der Variable sidebound der Wert von at/ac/tuwien/inso/introsec/ws2013/lab1/domain/Site.web zugewiesen wird. Man führt also javap -c auch für diese Klasse aus, kommt auf at/ac/tuwien/inso/introsec/ws2013/lab1/domain/Project.Nasa, von dort auf at/ac/tuwien/inso/introsec/ws2013/lab1/domain/Pictures.picasso, von dort auf at/ac/tuwien/inso/introsec/ws2013/lab1/domain/Hotel.spitzbergen und von dort auf den Benutzernamen DidIt.
+
+Ähnlich kommt man auch auf das Passwort. In ClientLocalLoginGui sieht man
+\begin{lstlisting}
+   33:  getfield    #90; //Field passTf1:Ljavax/swing/JPasswordField;
+   36:  invokevirtual   #179; //Method javax/swing/JPasswordField.getPassword:()[C
+   39:  invokespecial   #183; //Method java/lang/String."<init>":([C)V
+   42:  getstatic   #186; //Field at/ac/tuwien/inso/introsec/ws2013/lab1/conn/ServerWriter.mathListing:Ljava/lang/String;
+   45:  invokevirtual   #175; //Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+\end{lstlisting}
+
+Also der Wert vom JPasswordField passTf1 wird mit dem Wert von at/ac/tuwien/inso/introsec/ws2013/lab1/conn/ServerWriter.mathListing verglichen. ServerWriter.mathListing bekommt den Wert von at/ac/tuwien/inso/introsec/ws2013/lab1/gui/ClientWindowGui.windowID und das bekommt den Wert 4TehLulZ.
+\\\\
+Username:Passwort lautet also DitId:4TehLulZ
+\\\\
+Damit kann man sich in den Client einloggen. Mit Portforwarding kann man sich dann zum Server auf 192.168.10.22:54321 verbinden. Dort kann man in User und Passwort zB folgenden SQL Code injecten: \lstinline{'or 1=1;} und bekommt eine Auflistung von Dokumenten und Benutzernamen. Dort steht dann unter anderem Projekt Sonnensturm | esunden.
+
+
 
 Wie funktioniert der Angriff auf das WLAN und wie könnten Sie das Netzwerk vor solchen Angriffen schützen?
 Wie könnte der LAN Dump erstellt worden sein? Welche Sicherheitsmaßnahmen sollten das in Produktiv-Systemen verhindern?
